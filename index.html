@@ -1,0 +1,480 @@
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+
+<meta charset="utf-8">
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="generator" content="pandoc" />
+
+
+
+
+<title>IGF1R in UTUC</title>
+
+<script src="site_libs/jquery-1.11.3/jquery.min.js"></script>
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<link href="site_libs/bootstrap-3.3.5/css/cerulean.min.css" rel="stylesheet" />
+<script src="site_libs/bootstrap-3.3.5/js/bootstrap.min.js"></script>
+<script src="site_libs/bootstrap-3.3.5/shim/html5shiv.min.js"></script>
+<script src="site_libs/bootstrap-3.3.5/shim/respond.min.js"></script>
+<script src="site_libs/jqueryui-1.11.4/jquery-ui.min.js"></script>
+<link href="site_libs/tocify-1.9.1/jquery.tocify.css" rel="stylesheet" />
+<script src="site_libs/tocify-1.9.1/jquery.tocify.js"></script>
+<script src="site_libs/navigation-1.1/tabsets.js"></script>
+<link href="site_libs/highlightjs-1.1/default.css" rel="stylesheet" />
+<script src="site_libs/highlightjs-1.1/highlight.js"></script>
+<link href="site_libs/font-awesome-4.5.0/css/font-awesome.min.css" rel="stylesheet" />
+
+<style type="text/css">code{white-space: pre;}</style>
+<style type="text/css">
+  pre:not([class]) {
+    background-color: white;
+  }
+</style>
+<script type="text/javascript">
+if (window.hljs && document.readyState && document.readyState === "complete") {
+   window.setTimeout(function() {
+      hljs.initHighlighting();
+   }, 0);
+}
+</script>
+
+
+
+<style type="text/css">
+h1 {
+  font-size: 34px;
+}
+h1.title {
+  font-size: 38px;
+}
+h2 {
+  font-size: 30px;
+}
+h3 {
+  font-size: 24px;
+}
+h4 {
+  font-size: 18px;
+}
+h5 {
+  font-size: 16px;
+}
+h6 {
+  font-size: 12px;
+}
+.table th:not([align]) {
+  text-align: left;
+}
+</style>
+
+
+</head>
+
+<body>
+
+<style type = "text/css">
+.main-container {
+  max-width: 940px;
+  margin-left: auto;
+  margin-right: auto;
+}
+code {
+  color: inherit;
+  background-color: rgba(0, 0, 0, 0.04);
+}
+img {
+  max-width:100%;
+  height: auto;
+}
+.tabbed-pane {
+  padding-top: 12px;
+}
+button.code-folding-btn:focus {
+  outline: none;
+}
+</style>
+
+
+<style type="text/css">
+/* padding for bootstrap navbar */
+body {
+  padding-top: 51px;
+  padding-bottom: 40px;
+}
+/* offset scroll position for anchor links (for fixed navbar)  */
+.section h1 {
+  padding-top: 56px;
+  margin-top: -56px;
+}
+
+.section h2 {
+  padding-top: 56px;
+  margin-top: -56px;
+}
+.section h3 {
+  padding-top: 56px;
+  margin-top: -56px;
+}
+.section h4 {
+  padding-top: 56px;
+  margin-top: -56px;
+}
+.section h5 {
+  padding-top: 56px;
+  margin-top: -56px;
+}
+.section h6 {
+  padding-top: 56px;
+  margin-top: -56px;
+}
+</style>
+
+<script>
+// manage active state of menu based on current page
+$(document).ready(function () {
+  // active menu anchor
+  href = window.location.pathname
+  href = href.substr(href.lastIndexOf('/') + 1)
+  if (href === "")
+    href = "index.html";
+  var menuAnchor = $('a[href="' + href + '"]');
+
+  // mark it active
+  menuAnchor.parent().addClass('active');
+
+  // if it's got a parent navbar menu mark it active as well
+  menuAnchor.closest('li.dropdown').addClass('active');
+});
+</script>
+
+
+<div class="container-fluid main-container">
+
+<!-- tabsets -->
+<script>
+$(document).ready(function () {
+  window.buildTabsets("TOC");
+});
+</script>
+
+<!-- code folding -->
+
+
+
+
+<script>
+$(document).ready(function ()  {
+
+    // move toc-ignore selectors from section div to header
+    $('div.section.toc-ignore')
+        .removeClass('toc-ignore')
+        .children('h1,h2,h3,h4,h5').addClass('toc-ignore');
+
+    // establish options
+    var options = {
+      selectors: "h1,h2,h3",
+      theme: "bootstrap3",
+      context: '.toc-content',
+      hashGenerator: function (text) {
+        return text.replace(/[.\\/?&!#<>]/g, '').replace(/\s/g, '_').toLowerCase();
+      },
+      ignoreSelector: ".toc-ignore",
+      scrollTo: 0
+    };
+    options.showAndHide = true;
+    options.smoothScroll = true;
+
+    // tocify
+    var toc = $("#TOC").tocify(options).data("toc-tocify");
+});
+</script>
+
+<style type="text/css">
+
+#TOC {
+  margin: 25px 0px 20px 0px;
+}
+@media (max-width: 768px) {
+#TOC {
+  position: relative;
+  width: 100%;
+}
+}
+
+
+.toc-content {
+  padding-left: 30px;
+  padding-right: 40px;
+}
+
+div.main-container {
+  max-width: 1200px;
+}
+
+div.tocify {
+  width: 20%;
+  max-width: 260px;
+  max-height: 85%;
+}
+
+@media (min-width: 768px) and (max-width: 991px) {
+  div.tocify {
+    width: 25%;
+  }
+}
+
+@media (max-width: 767px) {
+  div.tocify {
+    width: 100%;
+    max-width: none;
+  }
+}
+
+.tocify ul, .tocify li {
+  line-height: 20px;
+}
+
+.tocify-subheader .tocify-item {
+  font-size: 0.90em;
+  padding-left: 25px;
+  text-indent: 0;
+}
+
+.tocify .list-group-item {
+  border-radius: 0px;
+}
+
+
+</style>
+
+<!-- setup 3col/9col grid for toc_float and main content  -->
+<div class="row-fluid">
+<div class="col-xs-12 col-sm-4 col-md-3">
+<div id="TOC" class="tocify">
+</div>
+</div>
+
+<div class="toc-content col-xs-12 col-sm-8 col-md-9">
+
+
+
+
+<div class="navbar navbar-default  navbar-fixed-top" role="navigation">
+  <div class="container">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar">
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="index.html">IGF1R in UTUC</a>
+    </div>
+    <div id="navbar" class="navbar-collapse collapse">
+      <ul class="nav navbar-nav">
+        <li>
+  <a href="index.html">
+    <span class="fa fa-home"></span>
+     
+  </a>
+</li>
+<li class="dropdown">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+    Descriptive analysis
+     
+    <span class="caret"></span>
+  </a>
+  <ul class="dropdown-menu" role="menu">
+    <li>
+      <a href="descriptive-cohort.html">Cohort features</a>
+    </li>
+    <li>
+      <a href="descriptive-marker.html">Marker features</a>
+    </li>
+  </ul>
+</li>
+<li class="dropdown">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+    Association analysis
+     
+    <span class="caret"></span>
+  </a>
+  <ul class="dropdown-menu" role="menu">
+    <li>
+      <a href="association-tissue.html">IGF1R by tissue type</a>
+    </li>
+    <li class="divider"></li>
+    <li class="dropdown-header">IGF1R by cohort features</li>
+    <li class="divider"></li>
+    <li>
+      <a href="association-cohort-h-median.html">Median H-scores</a>
+    </li>
+    <li>
+      <a href="association-cohort-h-max.html">Maximum H-scores</a>
+    </li>
+    <li>
+      <a href="association-cohort-her2-median.html">Median HER2 scores</a>
+    </li>
+    <li>
+      <a href="association-cohort-her2-max.html">Maximum HER2 scores</a>
+    </li>
+  </ul>
+</li>
+<li class="dropdown">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+    Outcome analysis
+     
+    <span class="caret"></span>
+  </a>
+  <ul class="dropdown-menu" role="menu">
+    <li>
+      <a href="outcome-regression.html">Regression analysis</a>
+    </li>
+    <li>
+      <a href="outcome-survival.html">Survival curves</a>
+    </li>
+  </ul>
+</li>
+      </ul>
+      <ul class="nav navbar-nav navbar-right">
+        
+      </ul>
+    </div><!--/.nav-collapse -->
+  </div><!--/.container -->
+</div><!--/.navbar -->
+
+<div class="fluid-row" id="header">
+
+
+
+<h1 class="title toc-ignore">IGF1R in UTUC</h1>
+
+</div>
+
+
+<p><strong>Title:</strong> Expression status and prognostic value of insulin-like growth factor-1 receptor (IGF1R) in upper tract urothelial carcinoma</p>
+<p><strong>Authors:</strong> Sheila Faraj<sup>1</sup>; Alcides Chaux<sup>2</sup>; George J. Netto<sup>3</sup></p>
+<p><strong>Affiliations:</strong> <sup>1</sup>Department of Pathology, The Johns Hopkins Medical Institutions, Baltimore, MD; <sup>2</sup>Centro para el Desarrollo de la Investigación Científica (CEDIC), Asunción, Paraguay; <sup>3</sup>Department of Pathology, The University of Alabama at Birmingham, Birmingham, AL</p>
+<p><strong>Last update:</strong> 2017-03-28</p>
+<hr />
+<div id="introduction" class="section level1">
+<h1><strong>Introduction</strong></h1>
+<p>The insulin-like growth factor-1 receptor (IGFR1) is a tyrosine kinase receptor that plays a key role in cell growth and transformation. IGFR1 is overexpressed in several tumors, but its expression status has not been described in upper tract uroethelial carcinomas (UTUC). IGFR1 inhibitors have been developed and are currently being tested in clinical trials. This study evaluates IGFR1 immunohistochemical expression in a set of UTUC and its association with clinicopathologic and outcome features.</p>
+<hr />
+<p> </p>
+</div>
+<div id="material-method" class="section level1">
+<h1><strong>Material &amp; Method</strong></h1>
+<div id="case-selection-and-tissue-microarray-construction" class="section level2">
+<h2>Case selection and tissue microarray construction</h2>
+<p>The present study includes tissue samples from 99 patients with UTUC. Cases were selected based on availability of formalin-fixed, paraffin-embedded tissue blocks. Two tissue microarrays (TMAs) were built at the Johns Hopkins TMA Lab Core (Baltimore, MD). A total of 591 TMA spots were evaluated including tumor and paired nontumor tissues.</p>
+<p> </p>
+</div>
+<div id="igf1r-expression-and-scoring-system" class="section level2">
+<h2>IGF1R expression and scoring system</h2>
+<p>IGF1R expression was evaluated by immunohistochemistry on 5 <span class="math inline">\(\mu\)</span>m TMA sections using a monoclonal rabbit (clone G11) anti-IGF1R antibody (Catalog #790-4346, Ventana Medical Systems, Inc., Tucson, AZ). Only membranous staining was considered as indicative of IGF1R expression.</p>
+<p>IGF1R expression was evaluated using 2 different approaches. The first approach consisted of a quantitative H-score system in which IGF1R expression was estimated as the sum of the products of the intensity (0 for negative, 1 for weakly positive, 2 for moderately positive, and 3 for strongly positive) multiplied by the extent of the stain (0% to 100%), obtaining a value ranging from 0 to 300. Estimations of the H-score were made spot by spot.</p>
+<p>The second approach for evaluating IGF1R expression consisted of a semi-quantitative score system similar to the standardized scoring system used for evaluating HER2 immunohistochemical expression. TMA spots were classified in any of the following categories: 0, no reactivity or membranous reactivity in &lt; 10% of tumor cells; 1+, faint or barely perceptible membranous partial reactivity in 10% or more of tumors cells; 2+, weak to moderate complete membranous reactivity in 10% or more of tumor cells; 3+, strong complete membranous reactivity in 10% or more of tumor cells.</p>
+<hr />
+<p> </p>
+</div>
+</div>
+<div id="data-analysis" class="section level1">
+<h1><strong>Data analysis</strong></h1>
+<p>Data analysis was carried out using 3 approaches: descriptive analysis, association analysis, and outcome analysis. Data was analyzed and plots were generated using R version 3.3.3 (2017-03-06) from the R Foundation for Statistical Computing (Vienna, Austria). R packages from the <a href="https://cran.r-project.org/web/packages/tidyverse/index.html">tidyverse</a> were extensively used.</p>
+<p> </p>
+<div id="descriptive-analysis" class="section level2">
+<h2>Descriptive analysis</h2>
+<p>Categorical variables were described using frequency tables and barplots. Numerical variables were described using measurements of central tendency and dispersion, histograms, and density plots. The descriptive analysis included:</p>
+<ul>
+<li>Cohort features</li>
+<li>IGF1R features in nontumor and tumor tissues (by TMA spots)
+<ul>
+<li>H-scores</li>
+<li>HER2 system</li>
+</ul></li>
+</ul>
+<p> </p>
+</div>
+<div id="association-analysis" class="section level2">
+<h2>Association analysis</h2>
+<p>Marker values were compared considering clinical, pathologic, and outcome features. In this context, marker values were considered as the outcome variables and the aforementioned features as the predictor variables. Variables were described using measurements of central tendency and dispersion, boxplots, and density plots.</p>
+<p>The association was evaluated using either the <a href="https://en.wikipedia.org/wiki/Mann-Whitney_U_test">Mann-Whitney U test for the sum of ranks</a> or the <a href="https://en.wikipedia.org/wiki/Kruskal-Wallis_one-way_analysis_of_variance">Kruskal-Wallis rank sum test</a>, depending on the features of the predictor variables.</p>
+<p>The association analysis included:</p>
+<ul>
+<li>IGF1R expression by tissue type (all, median and max values)
+<ul>
+<li>H-scores</li>
+<li>HER2 system</li>
+</ul></li>
+<li>IGF1R expression by cohort features (median and max values)
+<ul>
+<li>H-scores</li>
+<li>HER2 system</li>
+</ul></li>
+</ul>
+<p> </p>
+</div>
+<div id="outcome-analysis" class="section level2">
+<h2>Outcome analysis</h2>
+<p>The outcome analysis included regression modeling and time-to-event (survival) analysis. IGF1R levels were categorized as high/kow expression using the median and the maximum values as cutoff points. Outcome variables included tumor recurrence, tumor progression, overall mortality, and cancer-related mortality.</p>
+<p>Odds ratios were estimated using unconditional binary <a href="https://en.wikipedia.org/wiki/Logistic_regression">logistic regression</a>. Hazard ratios were estimated using <a href="https://en.wikipedia.org/wiki/Proportional_hazards_model">Cox’s proportional hazards regression</a>. Survival curves were built using the <a href="https://en.wikipedia.org/wiki/Kaplan-Meier_estimator">Kapplan-Meier estimator</a> and compared using the <a href="https://en.wikipedia.org/wiki/Log-rank_test">log-rank test</a>.</p>
+<p>The outcome analysis included:</p>
+<ul>
+<li>Regression analysis
+<ul>
+<li>Tumor recurrence</li>
+<li>Tumor progression</li>
+<li>Overall mortality</li>
+<li>Cancer related mortality</li>
+</ul></li>
+<li>Survival curves
+<ul>
+<li>H-scores</li>
+<li>HER2 system</li>
+</ul></li>
+</ul>
+<hr />
+<p> </p>
+</div>
+</div>
+<div id="supportfinancial-disclosure" class="section level1">
+<h1><strong>Support/Financial Disclosure</strong></h1>
+<p>Dr. Alcides Chaux was partially supported by an award granted by the National Council of Science and Technology (CONACYT) dependent of the Presidency of the Republic of Paraguay, as an Active Researcher of Level 2 of the National Incentive Program for Researchers (PRONII).</p>
+<p> </p>
+</div>
+
+
+
+</div>
+</div>
+
+</div>
+
+<script>
+
+// add bootstrap table styles to pandoc tables
+function bootstrapStylePandocTables() {
+  $('tr.header').parent('thead').parent('table').addClass('table table-condensed');
+}
+$(document).ready(function () {
+  bootstrapStylePandocTables();
+});
+
+
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    script.src  = "https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML";
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+
+</body>
+</html>
