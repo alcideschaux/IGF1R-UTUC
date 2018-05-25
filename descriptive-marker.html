@@ -4,7 +4,7 @@
 
 <head>
 
-<meta charset="utf-8">
+<meta charset="utf-8" />
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <meta name="generator" content="pandoc" />
 
@@ -320,6 +320,9 @@ div.tocify {
     <li>
       <a href="association-cohort-her2-max.html">Maximum HER2 scores</a>
     </li>
+    <li>
+      <a href="association-clinicopathologic.html">IFG1R positivity (HER2 score &gt; 1)</a>
+    </li>
   </ul>
 </li>
 <li class="dropdown">
@@ -329,11 +332,20 @@ div.tocify {
     <span class="caret"></span>
   </a>
   <ul class="dropdown-menu" role="menu">
+    <li class="divider"></li>
+    <li class="dropdown-header">IGF1R by scores</li>
+    <li class="divider"></li>
     <li>
       <a href="outcome-regression.html">Regression analysis</a>
     </li>
     <li>
       <a href="outcome-survival.html">Survival curves</a>
+    </li>
+    <li class="divider"></li>
+    <li class="dropdown-header">IGF1R positivity (HER2 score &gt; 1)</li>
+    <li class="divider"></li>
+    <li>
+      <a href="outcome-regression-igf1rexprs.html">Regression analysis</a>
     </li>
   </ul>
 </li>
@@ -545,7 +557,7 @@ $(document).ready(function () {
   (function () {
     var script = document.createElement("script");
     script.type = "text/javascript";
-    script.src  = "https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML";
+    script.src  = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML";
     document.getElementsByTagName("head")[0].appendChild(script);
   })();
 </script>
