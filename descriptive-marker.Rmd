@@ -1,0 +1,44 @@
+---
+title: "IGF1R expression features"
+---
+
+```{r global, message = FALSE, warning = FALSE, echo = FALSE}
+source("global.R")
+attach(DF_SCORES)
+```
+
+# **Tumor tissue**
+## Expression by H-scores
+```{r tumor.H_score}
+x <- H_score[tissue == "Tumor"]
+tbl_nice(x)
+g_nice(x, bin = 40)
+```
+
+***
+
+## Expression by HER2 system
+```{r tumor.HER2_score}
+x <- HER2_score[tissue == "Tumor"]
+tbl_nice(x)
+g_nice(x, bin = 1)
+```
+
+***
+
+# **Nontumor tissue**
+## Expression by H-scores
+```{r nontumor.H_score}
+x <- H_score[tissue == "Nontumor"]
+tbl_nice(x)
+g_nice(x, bin = 30, max_break = 4)
+```
+
+***
+
+## Expression by HER2 system
+```{r nontumor.HER2_score}
+x <- HER2_score[tissue == "Nontumor"]
+tbl_nice(x)
+g_nice(x, bin = 1)
+```

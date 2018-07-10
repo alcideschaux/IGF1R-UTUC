@@ -1,0 +1,129 @@
+---
+title: "IGF1R and survival curves"
+---
+
+```{r global, message = FALSE, warning = FALSE, echo = FALSE}
+source("global.R")
+attach(DF)
+```
+
+# **Median H-scores**
+## Tumor recurrence
+```{r h_group_median.recurrence}
+status <- h_group_median
+g_surv(fu_recurrence, recurrence, status)
+```
+
+***
+
+## Tumor progression
+```{r h_group_median.progression}
+g_surv(fu_progression, progression, status)
+```
+
+***
+
+## Overall mortality
+```{r h_group_median.dead}
+g_surv(fu_progression, dead, status)
+```
+
+***
+
+## Cancer-related mortality
+```{r h_group_median.dod}
+g_surv(fu_progression, dod, status)
+```
+
+***
+
+# **Maximum H-scores**
+## Tumor recurrence
+```{r h_group_max.recurrence}
+status <- h_group_max
+g_surv(fu_recurrence, recurrence, status)
+```
+
+***
+
+## Tumor progression
+```{r h_group_max.progression}
+g_surv(fu_progression, progression, status)
+```
+
+***
+
+## Overall mortality
+```{r h_group_max.dead}
+g_surv(fu_progression, dead, status)
+```
+
+***
+
+## Cancer-related mortality
+```{r h_group_max.dod}
+g_surv(fu_progression, dod, status)
+```
+
+***
+
+# **Median HER2 scores**
+## Tumor recurrence
+```{r her2_group_median.recurrence}
+status <- her2_group_median
+g_surv(fu_recurrence, recurrence, status)
+```
+
+***
+
+## Tumor progression
+```{r her2_group_median.progression}
+g_surv(fu_progression, progression, status)
+```
+
+***
+
+## Overall mortality
+```{r her2_group_median.dead}
+g_surv(fu_progression, dead, status)
+```
+
+***
+
+## Cancer-related mortality
+```{r her2_group_median.dod}
+g_surv(fu_progression, dod, status)
+```
+
+***
+
+# **Maximum HER2 scores**
+## Tumor recurrence
+```{r her2_group_max.recurrence}
+status <- her2_group_max
+g_surv(fu_recurrence, recurrence, status)
+```
+
+***
+
+## Tumor progression
+```{r her2_group_max.progression}
+g_surv(fu_progression, progression, status)
+```
+
+***
+
+## Overall mortality
+```{r her2_group_max.dead}
+g_surv(fu_progression, dead, status)
+```
+
+***
+
+## Cancer-related mortality
+```{r her2_group_max.dod}
+g_surv(fu_progression, dod, status)
+```
+
+***
+

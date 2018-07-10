@@ -1,0 +1,142 @@
+---
+title: "IFG1R median HER2 scores by cohort features"
+---
+
+```{r global, message = FALSE, warning = FALSE, echo = FALSE}
+source("global.R")
+attach(DF)
+x <- tumor_her2_median
+```
+
+# **Clinical features**
+## Age, in years
+```{r age}
+y <- age_group
+tbl_nice(x, y)
+tbl_test(x, y)
+g2_nice(x, y)
+```
+
+***
+
+## Sex
+```{r sex}
+y <- sex
+tbl_nice(x, y)
+tbl_test(x, y)
+g2_nice(x, y)
+```
+
+***
+
+# **Pathologic features**
+## Tumor location
+```{r location}
+y <- location
+tbl_nice(x, y)
+tbl_test(x, y)
+g2_nice(x, y)
+```
+
+***
+
+## pT stage
+```{r pt}
+y <- pt
+tbl_nice(x, y)
+tbl_test(x, y)
+g2_nice(x, y)
+```
+
+***
+
+## High pT stage (> pT2)
+```{r high_pt}
+y <- high_pt
+tbl_nice(x, y)
+tbl_test(x, y)
+g2_nice(x, y)
+```
+
+***
+
+## Histologic grade
+```{r grade}
+y <- grade
+tbl_nice(x, y)
+tbl_test(x, y)
+g2_nice(x, y)
+```
+
+***
+
+## WHO histologic grade
+```{r high_grade}
+y <- high_grade
+tbl_nice(x, y)
+tbl_test(x, y)
+g2_nice(x, y)
+```
+
+***
+
+## Lymph nodes metastasis
+```{r lymph_nodes}
+y <- lymph_nodes
+tbl_nice(x, y)
+tbl_test(x, y)
+g2_nice(x, y)
+```
+
+***
+
+## Lymphovascular invasion
+```{r lvi}
+y <- lvi
+tbl_nice(x, y)
+tbl_test(x, y)
+g2_nice(x, y)
+```
+
+***
+
+# **Outcome**
+## Tumor recurrence
+```{r recurrence}
+y <- recurrence
+tbl_nice(x, y)
+tbl_test(x, y)
+g2_nice(x, y)
+```
+
+***
+
+## Tumor progression
+```{r progression}
+y <- progression
+tbl_nice(x, y)
+tbl_test(x, y)
+g2_nice(x, y)
+```
+
+***
+
+## Overall mortality
+```{r dead}
+y <- dead
+tbl_nice(x, y)
+tbl_test(x, y)
+g2_nice(x, y)
+```
+
+***
+
+## Cancer-related mortality
+```{r dod}
+y <- dod
+tbl_nice(x, y)
+tbl_test(x, y)
+g2_nice(x, y)
+```
+
+***

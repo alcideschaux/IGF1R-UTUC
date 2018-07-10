@@ -1,0 +1,52 @@
+output:
+  html_document:
+    theme: cerulean
+    toc: yes
+    toc_float: yes
+    lib_dir: site_libs
+    self_contained: no
+navbar:
+  title: IGF1R in UTUC
+  left:
+  - icon: fa-home
+    href: index.html
+  - text: Descriptive analysis
+    menu:
+    - text: Cohort features
+      href: descriptive-cohort.html
+    - text: Marker features
+      href: descriptive-marker.html
+  - text: Association analysis
+    menu:
+    - text: IGF1R by tissue type
+      href: association-tissue.html
+    - text: '---'
+    - text: IGF1R by cohort features
+    - text: '---'
+    - text: Median H-scores
+      href: association-cohort-h-median.html
+    - text: Maximum H-scores
+      href: association-cohort-h-max.html
+    - text: Median HER2 scores
+      href: association-cohort-her2-median.html
+    - text: Maximum HER2 scores
+      href: association-cohort-her2-max.html
+    - text: IFG1R positivity (Maximum HER2 score/spot > 1)
+      href: association-clinicopathologic.html
+  - text: Outcome analysis
+    menu:
+    - text: '---'
+    - text: IGF1R by scores
+    - text: '---'
+    - text: Regression analysis
+      href: outcome-regression.html
+    - text: Survival curves
+      href: outcome-survival.html
+    - text: '---'
+    - text: IGF1R positivity (HER2 score > 1)
+    - text: '---'
+    - text: Regression analysis
+      href: outcome-regression-igf1rexprs.html
+name: report
+output_dir: ''
+

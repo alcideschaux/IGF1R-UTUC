@@ -1,0 +1,22 @@
+{
+    "collab_server" : "",
+    "contents" : "",
+    "created" : 1526918841537.000,
+    "dirty" : false,
+    "encoding" : "UTF-8",
+    "folds" : "",
+    "hash" : "1625854220",
+    "id" : "3FD0611D",
+    "lastKnownWriteTime" : 1526926100,
+    "last_content_update" : 1526926100104,
+    "path" : "~/achaux@gmail.com/research/Projects_Analysis/IFG1R-UTUC/data/tidy.R",
+    "project_path" : null,
+    "properties" : {
+        "cursorPosition" : "186,36",
+        "scrollLine" : "0"
+    },
+    "relative_order" : 2,
+    "source_on_save" : true,
+    "source_window" : "",
+    "type" : "r_source"
+}

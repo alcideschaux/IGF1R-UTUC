@@ -1,0 +1,161 @@
+---
+title: "IGF1R and clinicopathologic and outcome features"
+editor_options: 
+  chunk_output_type: console
+---
+
+```{r global, message = FALSE, warning = FALSE, echo = FALSE}
+source("global.R")
+
+# Libraries
+library(simpleR)
+
+# Data
+attach(DF)
+y <- igf1r_exprs
+```
+
+***
+
+# **Clinical features**
+## Age
+```{r age}
+x <- age
+tbl_nice(x, y)
+tbl_test(x, y)
+g2_nice(x, y)
+```
+
+***
+
+## Sex
+```{r sex}
+x <- sex
+tbl_nice(x, y)
+tbl_test(x, y)
+g2_nice(x, y)
+```
+
+***
+
+# **Pathologic features**
+## Tumor location
+```{r location}
+x <- location
+tbl_nice(x, y)
+tbl_test(x, y)
+g2_nice(x, y)
+```
+
+***
+
+## pT stage
+```{r pt}
+x <- pt
+tbl_nice(x, y)
+tbl_test(x, y)
+g2_nice(x, y)
+```
+
+***
+
+## High pT stage
+```{r high_pt}
+x <- high_pt
+tbl_nice(x, y)
+tbl_test(x, y)
+g2_nice(x, y)
+```
+
+***
+
+## Histologic grade
+```{r grade}
+x <- grade
+tbl_nice(x, y)
+tbl_test(x, y)
+g2_nice(x, y)
+```
+
+***
+
+## High histologic grade
+```{r high_grade}
+x <- high_grade
+tbl_nice(x, y)
+tbl_test(x, y)
+g2_nice(x, y)
+```
+
+***
+
+## Lymph nodes metastasis
+```{r lymph_nodes}
+x <- lymph_nodes
+tbl_nice(x, y)
+tbl_test(x, y)
+g2_nice(x, y)
+```
+
+***
+
+## Lymphovascular invasion
+```{r lvi}
+x <- lvi
+tbl_nice(x, y)
+tbl_test(x, y)
+g2_nice(x, y)
+```
+
+***
+
+# **Outcome features**
+## Tumor recurrence
+```{r recurence}
+x <- recurrence
+tbl_nice(x, y)
+tbl_test(x, y)
+g2_nice(x, y)
+```
+
+***
+
+## Tumor progression
+```{r progression}
+x <- progression
+tbl_nice(x, y)
+tbl_test(x, y)
+g2_nice(x, y)
+```
+
+***
+
+## Patients' outcome
+```{r outcome}
+x <- outcome
+tbl_nice(x, y)
+tbl_test(x, y)
+g2_nice(x, y)
+```
+
+***
+
+## Cancer-specific mortality
+```{r dod}
+x <- dod
+tbl_nice(x, y)
+tbl_test(x, y)
+g2_nice(x, y)
+```
+
+***
+
+## Overall mortality
+```{r dead}
+x <- dead
+tbl_nice(x, y)
+tbl_test(x, y)
+g2_nice(x, y)
+```
+
+***

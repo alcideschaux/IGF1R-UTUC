@@ -1,0 +1,44 @@
+---
+title: "IGF1R expression and outcome risks"
+---
+
+```{r global, message = FALSE, warning = FALSE, echo = FALSE}
+source("global.R")
+attach(DF)
+predictors <- list(
+    "High IGF1R H-score median expression" = h_group_median,
+    "High IGF1R H-score maximum expression" = h_group_max,
+    "High IGF1R HER2 score median expression" = her2_group_median,
+    "High IGF1R HER2 score maximum expression" = her2_group_max
+)
+
+varlabels <- names(predictors)
+```
+
+# **Tumor recurrence**
+```{r recurrence}
+tbl_logcox(recurrence, fu_recurrence, predictors, varlabels)
+```
+
+***
+
+# **Tumor progression**
+```{r progression}
+tbl_logcox(progression, fu_progression, predictors, varlabels)
+```
+
+***
+
+# **Overall mortality**
+```{r dead}
+tbl_logcox(dead, fu_progression, predictors, varlabels)
+```
+
+***
+
+# **Cancer-related mortality**
+```{r dod}
+tbl_logcox(dod, fu_progression, predictors, varlabels)
+```
+
+***

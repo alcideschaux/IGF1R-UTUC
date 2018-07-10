@@ -1,0 +1,187 @@
+library(tidyverse)
+library(readxl)
+library(stringr)
+library(forcats)
+
+#---------------------#
+# SCORES SPOT BY SPOT #
+#---------------------#
+
+DF_SCORES <- read_excel("../data/IGF1R UTUC.xlsx", sheet = 3)
+
+# Replacing white spaces in colnames for underscores
+colnames(DF_SCORES) <- str_replace_all(colnames(DF_SCORES), " ", "_")
+
+# Selecting only columns of interest
+DF_SCORES <- DF_SCORES %>% 
+    select(case_code, H_score, HER2_score)
+
+DF_SCORES <- DF_SCORES %>% 
+    mutate(
+        id = str_replace_all(case_code, "-?[0-9]?[0-9]?[NT]", ""),
+        id = factor(fct_recode(id, "H0101974" = "H0101974-(8-10)")),
+        tissue = str_replace_all(case_code, ".*N", "Nontumor"),
+        tissue = factor(str_replace_all(tissue, ".*T", "Tumor"))
+    )
+
+#----------------------------------------------------------------#
+# CLINICOPATHOLOGIC AND OUTCOME FEATURES WITH AVG AND MAX SCORES #
+#----------------------------------------------------------------#
+
+DF <- read_excel("../data/IGF1R UTUC.xlsx", sheet = 1)
+
+# Replacing characters in colnames for underscores
+colnames(DF) <- str_replace_all(colnames(DF), "[ :;=_]", "")
+colnames(DF) <- str_replace_all(colnames(DF), "-", "")
+
+# Tidying the dataframe
+DF <- DF %>% 
+    # Removing unnecesary columns
+    select(
+        -(avg0:highesther2score1),
+        -outcomeLFU0DOD1DOC2NED3AWD,
+        -ProgressionotherthanBtrecurrenceno0yes1,
+        -fumoprogotherthanbtrec) %>% 
+    # Renaming data columns
+    rename(
+        id = casecode,
+        sex = gender0male1female,
+        location = location0pelvis1ureter2pelvisureter,
+        pt = ptpTa0pT11pT22pT33pT44,
+        high_pt = highptno0yes1,
+        high_grade = highgradeno0yes1,
+        lymph_nodes = lymphno0yes1,
+        lvi = lvino0yes1,
+        recurrence = Btrecurrenceno0yes1,
+        fu_recurrence = fumobtrec,
+        progression = progressionno0yes1,
+        fu_progression = fumoprog,
+        dod = dodno0yes1
+    ) %>% 
+    # Tidying data columns
+    mutate(
+        sex = fct_recode(factor(sex),
+            "Male" = "0",
+            "Female" = "1"
+        ),
+        location = fct_recode(factor(location),
+            "Pelvis" = "0",
+            "Ureter" = "1",
+            "Pelvis-ureter" = "2"
+        ),
+        pt = fct_recode(factor(pt, levels = c(as.character(0:4))),
+            "pTa" = "0",
+            "pT1" = "1",
+            "pT2" = "2",
+            "pT3" = "3",
+            "pT4" = "4"
+        ),
+        high_pt = fct_recode(factor(high_pt, levels = c("0", "1")),
+            "Low pT (pT0-pT2)" = "0",
+            "High pT (pT3-pT4)" = "1"
+        ),
+        grade = factor(grade, levels = c("Grade 1", "Grade 2", "Grade 3")),
+        high_grade = fct_recode(factor(high_grade, levels = c("0", "1")),
+            "Low grade" = "0",
+            "High grade" = "1"
+        ),
+        lymph_nodes = fct_recode(factor(lymph_nodes, levels = c("0", "1")),
+            "No Lymph node metastasis" = "0",
+            "Lymph node mestastasis" = "1"
+        ),
+        lvi = fct_recode(factor(lvi, levels = c("0", "1")),
+            "No lymphovascular invasion" = "0",
+            "Lymphovascular invasion" = "1"
+        ),
+        recurrence = fct_recode(factor(recurrence, levels = c("0", "1")),
+            "No tumor recurrence" = "0",
+            "Tumor recurrence" = "1"
+        ),
+        progression = fct_recode(factor(progression, levels = c("0", "1")),
+            "No tumor progression" = "0",
+            "Tumor progression" = "1"
+        ),
+        outcome = factor(outcome),
+        dod = fct_recode(factor(dod, levels = c("0", "1")),
+            "NED + AWD + DOC + LFU" = "0",
+            "DOD" = "1"
+        ),
+        dead = fct_collapse(factor(outcome),
+            "NED + AWD + LFU" = c("NED", "AWD", "LFU"),
+            "DOC + DOD" = c("DOC", "DOD")
+        ),
+        age_group = factor(ifelse(
+            age > median(age, na.rm = TRUE), "Older group", "Younger group"
+        ), levels = c("Younger group", "Older group"))
+    )
+
+# Creating intermediate dataframes for markers summarized values
+# H-scores
+H_median <- DF_SCORES %>% 
+    group_by(id, tissue) %>% 
+    summarize(H_median = median(H_score, na.rm = TRUE)) %>% 
+    spread(tissue, H_median) %>% 
+    rename(tumor_h_median = Tumor, nontumor_h_median = Nontumor)
+
+H_max <- DF_SCORES %>% 
+    group_by(id, tissue) %>% 
+    summarize(H_max = max(H_score, na.rm = TRUE)) %>% 
+    spread(tissue, H_max) %>% 
+    rename(tumor_h_max = Tumor, nontumor_h_max = Nontumor)
+
+H_scores <- merge(H_median, H_max)
+
+# HER2 scores
+HER2_median <- DF_SCORES %>% 
+    group_by(id, tissue) %>% 
+    summarize(HER2_median = median(HER2_score, na.rm = TRUE)) %>% 
+    spread(tissue, HER2_median) %>% 
+    rename(tumor_her2_median = Tumor, nontumor_her2_median = Nontumor)
+
+HER2_max <- DF_SCORES %>% 
+    group_by(id, tissue) %>% 
+    summarize(HER2_max = max(HER2_score, na.rm = TRUE)) %>% 
+    spread(tissue, HER2_max) %>% 
+    rename(tumor_her2_max = Tumor, nontumor_her2_max = Nontumor)
+
+HER2_scores <- merge(HER2_median, HER2_max)
+
+# H + HER2 scores
+scores <- merge(H_scores, HER2_scores)
+
+# Appending scores to dataframe
+DF <- merge(DF, scores)
+
+# Categorizing IGF1R expression levels
+DF <- DF %>% 
+    mutate(
+        h_group_median = factor(ifelse(
+            tumor_h_median > median(tumor_h_median, na.rm = TRUE),
+            "High IGF1R", "Low IGF1R"
+        ), levels = c("Low IGF1R", "High IGF1R")
+        ),
+        h_group_max = factor(ifelse(
+            tumor_h_max > median(tumor_h_max, na.rm = TRUE),
+            "High IGF1R", "Low IGF1R"
+        ), levels = c("Low IGF1R", "High IGF1R")
+        ),
+        her2_group_median = factor(ifelse(
+            tumor_her2_median > median(tumor_her2_median, na.rm = TRUE),
+            "High IGF1R", "Low IGF1R"
+        ), levels = c("Low IGF1R", "High IGF1R")
+        ),
+        her2_group_max = factor(ifelse(
+            tumor_her2_max > median(tumor_her2_max, na.rm = TRUE),
+            "High IGF1R", "Low IGF1R"
+        ), levels = c("Low IGF1R", "High IGF1R")
+        ),
+        igf1r_exprs = factor(ifelse(
+            tumor_her2_max > 0, "IGF1R Positive", "IGF1R Negative"
+        ))
+    )
+
+# Removing intermediate objects
+intermediate <- c("H_median", "H_max", "H_scores", "HER2_median", "HER2_max", "HER2_scores", "scores")
+rm(list = intermediate)
+
+save(DF, DF_SCORES, file = "../data/DF.Rdata")

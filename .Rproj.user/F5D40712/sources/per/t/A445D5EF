@@ -1,0 +1,24 @@
+{
+    "collab_server" : "",
+    "contents" : "",
+    "created" : 1526925618913.000,
+    "dirty" : false,
+    "encoding" : "UTF-8",
+    "folds" : "",
+    "hash" : "2184439875",
+    "id" : "A445D5EF",
+    "lastKnownWriteTime" : 1526992128,
+    "last_content_update" : 1526992128868,
+    "path" : "~/achaux@gmail.com/research/Projects_Analysis/IFG1R-UTUC/report/association-clinicopathologic.Rmd",
+    "project_path" : "association-clinicopathologic.Rmd",
+    "properties" : {
+        "chunk_output_type" : "console",
+        "cursorPosition" : "31,8",
+        "scrollLine" : "20",
+        "tempName" : "Untitled1"
+    },
+    "relative_order" : 4,
+    "source_on_save" : false,
+    "source_window" : "",
+    "type" : "r_markdown"
+}

@@ -1,0 +1,20 @@
+{
+    "collab_server" : "",
+    "contents" : "output:\n  html_document:\n    theme: cerulean\n    toc: yes\n    toc_float: yes\n    lib_dir: site_libs\n    self_contained: no\nnavbar:\n  title: IGF1R in UTUC\n  left:\n  - icon: fa-home\n    href: index.html\n  - text: Descriptive analysis\n    menu:\n    - text: Cohort features\n      href: descriptive-cohort.html\n    - text: Marker features\n      href: descriptive-marker.html\n  - text: Association analysis\n    menu:\n    - text: IGF1R by tissue type\n      href: association-tissue.html\n    - text: '---'\n    - text: IGF1R by cohort features\n    - text: '---'\n    - text: Median H-scores\n      href: association-cohort-h-median.html\n    - text: Maximum H-scores\n      href: association-cohort-h-max.html\n    - text: Median HER2 scores\n      href: association-cohort-her2-median.html\n    - text: Maximum HER2 scores\n      href: association-cohort-her2-max.html\n    - text: IFG1R positivity (HER2 score > 1)\n      href: association-clinicopathologic.html\n  - text: Outcome analysis\n    menu:\n    - text: '---'\n    - text: IGF1R by scores\n    - text: '---'\n    - text: Regression analysis\n      href: outcome-regression.html\n    - text: Survival curves\n      href: outcome-survival.html\n    - text: '---'\n    - text: IGF1R positivity (HER2 score > 1)\n    - text: '---'\n    - text: Regression analysis\n      href: outcome-regression-igf1rexprs.html\nname: report\noutput_dir: _site\n\n",
+    "created" : 1527203159075.000,
+    "dirty" : false,
+    "encoding" : "UTF-8",
+    "folds" : "",
+    "hash" : "3009229764",
+    "id" : "DFC6D2CE",
+    "lastKnownWriteTime" : 1527203719,
+    "last_content_update" : 1527203719855,
+    "path" : "C:/Users/Alcides Chaux/Google Drive/research/Projects_Analysis/IFG1R-UTUC/report/_site.yml",
+    "project_path" : "_site.yml",
+    "properties" : {
+    },
+    "relative_order" : 2,
+    "source_on_save" : false,
+    "source_window" : "",
+    "type" : "yaml"
+}

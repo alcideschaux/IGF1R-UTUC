@@ -1,0 +1,418 @@
+---
+title: "Regression by IGF1R positivity"
+editor_options: 
+  chunk_output_type: console
+---
+
+```{r global, message=FALSE, warning=FALSE, echo=FALSE}
+source("global.R")
+
+# Libraries
+library(survival)
+```
+
+***
+
+# Tumor progression
+## Unadjusted model
+```{r unadjusted_progression}
+# Age
+mdl_unadj <- coxph(
+  Surv(fu_progression, as.numeric(progression)) ~ age,
+  data = DF
+)
+sum_mdl_unadj <- summary(mdl_unadj)
+mdl_tbl_unadj <- t(c(
+    sum_mdl_unadj$conf.int[ , -2],
+    sum_mdl_unadj$coefficients[ , 5]
+    )) %>% 
+    formatC(digits = 2, format = "fg") %>% 
+    data.frame()
+rownames(mdl_tbl_unadj) <- c("Age, per 1 year increase")
+unadj_age <- mdl_tbl_unadj
+
+# Sex
+mdl_unadj <- coxph(
+  Surv(fu_progression, as.numeric(progression)) ~ sex,
+  data = DF
+)
+sum_mdl_unadj <- summary(mdl_unadj)
+mdl_tbl_unadj <- t(c(
+    sum_mdl_unadj$conf.int[ , -2],
+    sum_mdl_unadj$coefficients[ , 5]
+    )) %>% 
+    formatC(digits = 2, format = "fg") %>% 
+    data.frame()
+rownames(mdl_tbl_unadj) <- c("Sex: Female vs Male")
+unadj_sex <- mdl_tbl_unadj
+
+# Location
+mdl_unadj <- coxph(
+  Surv(fu_progression, as.numeric(progression)) ~ location,
+  data = DF
+)
+sum_mdl_unadj <- summary(mdl_unadj)
+mdl_tbl_unadj <- cbind(
+    sum_mdl_unadj$conf.int[ , -2],
+    sum_mdl_unadj$coefficients[ , 5]
+    ) %>% 
+    formatC(digits = 2, format = "fg") %>% 
+    data.frame()
+rownames(mdl_tbl_unadj) <- c(
+    "Location: Ureter vs Pelvis",
+    "Location: Pelvis-ureter vs Pelvis"
+)
+unadj_location <- mdl_tbl_unadj
+
+# pT stage
+mdl_unadj <- coxph(
+  Surv(fu_progression, as.numeric(progression)) ~ high_pt,
+  data = DF
+)
+sum_mdl_unadj <- summary(mdl_unadj)
+mdl_tbl_unadj <- t(c(
+    sum_mdl_unadj$conf.int[ , -2],
+    sum_mdl_unadj$coefficients[ , 5]
+    )) %>% 
+    formatC(digits = 2, format = "fg") %>% 
+    data.frame()
+rownames(mdl_tbl_unadj) <- c(
+    "pT stage: High stage vs Low stage"
+)
+unadj_pt <- mdl_tbl_unadj
+
+# WHO Grade (NOT INCLUDED DUE TO INFINITE BETA)
+# mdl_unadj <- coxph(
+#   Surv(fu_progression, as.numeric(progression)) ~ high_grade,
+#   data = DF
+# )
+# sum_mdl_unadj <- summary(mdl_unadj)
+# mdl_tbl_unadj <- t(c(
+#     sum_mdl_unadj$conf.int[ , -2],
+#     sum_mdl_unadj$coefficients[ , 5]
+#     )) %>% 
+#     formatC(digits = 2, format = "fg") %>% 
+#     data.frame()
+# rownames(mdl_tbl_unadj) <- c(
+#     "WHO Grade: High grade vs low grade"
+# )
+# unadj_grade <- mdl_tbl_unadj
+
+# Lymphovascular invasion
+mdl_unadj <- coxph(
+  Surv(fu_progression, as.numeric(progression)) ~ lvi,
+  data = DF
+)
+sum_mdl_unadj <- summary(mdl_unadj)
+mdl_tbl_unadj <- t(c(
+    sum_mdl_unadj$conf.int[ , -2],
+    sum_mdl_unadj$coefficients[ , 5]
+    )) %>% 
+    formatC(digits = 2, format = "fg") %>% 
+    data.frame()
+rownames(mdl_tbl_unadj) <- c(
+    "Lymphovascular invasion: Present vs Absent"
+)
+unadj_lvi <- mdl_tbl_unadj
+
+# Lymph nodes metastasis
+mdl_unadj <- coxph(
+  Surv(fu_progression, as.numeric(progression)) ~ lymph_nodes,
+  data = DF
+)
+sum_mdl_unadj <- summary(mdl_unadj)
+mdl_tbl_unadj <- t(c(
+    sum_mdl_unadj$conf.int[ , -2],
+    sum_mdl_unadj$coefficients[ , 5]
+    )) %>% 
+    formatC(digits = 2, format = "fg") %>% 
+    data.frame()
+rownames(mdl_tbl_unadj) <- c(
+    "Lymph nodes metastasis: Present vs Absent"
+)
+unadj_lymph_nodes <- mdl_tbl_unadj
+
+# IFG1R
+mdl_unadj <- coxph(
+  Surv(fu_progression, as.numeric(progression)) ~ igf1r_exprs,
+  data = DF
+)
+sum_mdl_unadj <- summary(mdl_unadj)
+mdl_tbl_unadj <- t(c(
+    sum_mdl_unadj$conf.int[ , -2],
+    sum_mdl_unadj$coefficients[ , 5]
+    )) %>% 
+    formatC(digits = 2, format = "fg") %>% 
+    data.frame()
+rownames(mdl_tbl_unadj) <- c(
+    "IGF1R: Positive vs Negative"
+)
+unadj_ifg1r_exprs <- mdl_tbl_unadj
+
+# Merging tables
+mdl_tbl_unadj <- rbind(
+    unadj_age,
+    unadj_sex,
+    unadj_location,
+    unadj_pt,
+#    unadj_grade,
+    unadj_lvi,
+    unadj_lymph_nodes,
+    unadj_ifg1r_exprs
+)
+
+# Final table
+kable(
+    mdl_tbl_unadj,
+    col.names = c("HR", "Lower .95", "Upper .95", "P value"),
+    align = c("c")
+)
+```
+
+**Note:** WHO grade was not included in the regression model for tumor progression due to the absence of low-grade cases that progressed.
+
+***
+
+## Adjusted model
+```{r adjusted_progression}
+mdl <- coxph(
+  Surv(fu_progression, as.numeric(progression)) ~ 
+      age + 
+      sex + 
+      location + 
+      high_pt + 
+#      high_grade + 
+      lvi + 
+      lymph_nodes + 
+      igf1r_exprs,
+  data = DF
+)
+
+sum_mdl <- summary(mdl)
+
+mdl_tbl <- cbind(
+    sum_mdl$conf.int[ , -2],
+    sum_mdl$coefficients[ , 5]
+)
+
+rownames(mdl_tbl) <- c(
+    "Age, per 1 year increase",
+    "Sex: Female vs Male",
+    "Location: Ureter vs Pelvis",
+    "Location: Pelvis-ureter vs Pelvis",
+    "pT stage: High stage vs Low stage",
+#    "WHO Grade: High grade vs low grade",
+    "Lymphovascular invasion: Present vs Absent",
+    "Lymph nodes metastasis: Present vs Absent",
+    "IGF1R: Positive vs Negative"
+)
+
+kable(
+    formatC(mdl_tbl, digits = 2, format = "fg"),
+    col.names = c("HR", "Lower .95", "Upper .95", "P value"),
+    align = c("c")
+)
+```
+
+**Note:** WHO grade was not included in the regression model for tumor progression due to the absence of low-grade cases that progressed.
+
+***
+
+# Cancer-specific mortality
+## Unadjusted model
+```{r unadjusted_dod}
+# Age
+mdl_unadj <- coxph(
+  Surv(fu_progression, as.numeric(dod)) ~ age,
+  data = DF
+)
+sum_mdl_unadj <- summary(mdl_unadj)
+mdl_tbl_unadj <- t(c(
+    sum_mdl_unadj$conf.int[ , -2],
+    sum_mdl_unadj$coefficients[ , 5]
+    )) %>% 
+    formatC(digits = 2, format = "fg") %>% 
+    data.frame()
+rownames(mdl_tbl_unadj) <- c("Age, per 1 year increase")
+unadj_age <- mdl_tbl_unadj
+
+# Sex
+mdl_unadj <- coxph(
+  Surv(fu_progression, as.numeric(dod)) ~ sex,
+  data = DF
+)
+sum_mdl_unadj <- summary(mdl_unadj)
+mdl_tbl_unadj <- t(c(
+    sum_mdl_unadj$conf.int[ , -2],
+    sum_mdl_unadj$coefficients[ , 5]
+    )) %>% 
+    formatC(digits = 2, format = "fg") %>% 
+    data.frame()
+rownames(mdl_tbl_unadj) <- c("Sex: Female vs Male")
+unadj_sex <- mdl_tbl_unadj
+
+# Location
+mdl_unadj <- coxph(
+  Surv(fu_progression, as.numeric(dod)) ~ location,
+  data = DF
+)
+sum_mdl_unadj <- summary(mdl_unadj)
+mdl_tbl_unadj <- cbind(
+    sum_mdl_unadj$conf.int[ , -2],
+    sum_mdl_unadj$coefficients[ , 5]
+    ) %>% 
+    formatC(digits = 2, format = "fg") %>% 
+    data.frame()
+rownames(mdl_tbl_unadj) <- c(
+    "Location: Ureter vs Pelvis",
+    "Location: Pelvis-ureter vs Pelvis"
+)
+unadj_location <- mdl_tbl_unadj
+
+# pT stage
+mdl_unadj <- coxph(
+  Surv(fu_progression, as.numeric(dod)) ~ high_pt,
+  data = DF
+)
+sum_mdl_unadj <- summary(mdl_unadj)
+mdl_tbl_unadj <- t(c(
+    sum_mdl_unadj$conf.int[ , -2],
+    sum_mdl_unadj$coefficients[ , 5]
+    )) %>% 
+    formatC(digits = 2, format = "fg") %>% 
+    data.frame()
+rownames(mdl_tbl_unadj) <- c(
+    "pT stage: High stage vs Low stage"
+)
+unadj_pt <- mdl_tbl_unadj
+
+# WHO Grade
+mdl_unadj <- coxph(
+  Surv(fu_progression, as.numeric(dod)) ~ high_grade,
+  data = DF
+)
+sum_mdl_unadj <- summary(mdl_unadj)
+mdl_tbl_unadj <- t(c(
+    sum_mdl_unadj$conf.int[ , -2],
+    sum_mdl_unadj$coefficients[ , 5]
+    )) %>%
+    formatC(digits = 2, format = "fg") %>%
+    data.frame()
+rownames(mdl_tbl_unadj) <- c(
+    "WHO Grade: High grade vs low grade"
+)
+unadj_grade <- mdl_tbl_unadj
+
+# Lymphovascular invasion
+mdl_unadj <- coxph(
+  Surv(fu_progression, as.numeric(dod)) ~ lvi,
+  data = DF
+)
+sum_mdl_unadj <- summary(mdl_unadj)
+mdl_tbl_unadj <- t(c(
+    sum_mdl_unadj$conf.int[ , -2],
+    sum_mdl_unadj$coefficients[ , 5]
+    )) %>% 
+    formatC(digits = 2, format = "fg") %>% 
+    data.frame()
+rownames(mdl_tbl_unadj) <- c(
+    "Lymphovascular invasion: Present vs Absent"
+)
+unadj_lvi <- mdl_tbl_unadj
+
+# Lymph nodes metastasis
+mdl_unadj <- coxph(
+  Surv(fu_progression, as.numeric(dod)) ~ lymph_nodes,
+  data = DF
+)
+sum_mdl_unadj <- summary(mdl_unadj)
+mdl_tbl_unadj <- t(c(
+    sum_mdl_unadj$conf.int[ , -2],
+    sum_mdl_unadj$coefficients[ , 5]
+    )) %>% 
+    formatC(digits = 2, format = "fg") %>% 
+    data.frame()
+rownames(mdl_tbl_unadj) <- c(
+    "Lymph nodes metastasis: Present vs Absent"
+)
+unadj_lymph_nodes <- mdl_tbl_unadj
+
+# IFG1R
+mdl_unadj <- coxph(
+  Surv(fu_progression, as.numeric(dod)) ~ igf1r_exprs,
+  data = DF
+)
+sum_mdl_unadj <- summary(mdl_unadj)
+mdl_tbl_unadj <- t(c(
+    sum_mdl_unadj$conf.int[ , -2],
+    sum_mdl_unadj$coefficients[ , 5]
+    )) %>% 
+    formatC(digits = 2, format = "fg") %>% 
+    data.frame()
+rownames(mdl_tbl_unadj) <- c(
+    "IGF1R: Positive vs Negative"
+)
+unadj_ifg1r_exprs <- mdl_tbl_unadj
+
+# Merging tables
+mdl_tbl_unadj <- rbind(
+    unadj_age,
+    unadj_sex,
+    unadj_location,
+    unadj_pt,
+    unadj_grade,
+    unadj_lvi,
+    unadj_lymph_nodes,
+    unadj_ifg1r_exprs
+)
+
+# Final table
+kable(
+    mdl_tbl_unadj,
+    col.names = c("HR", "Lower .95", "Upper .95", "P value"),
+    align = c("c")
+)
+```
+
+
+## Adjusted model
+```{r adjusted_dod}
+mdl <- coxph(
+  Surv(fu_progression, as.numeric(dod)) ~ 
+      age + 
+      sex + 
+      location + 
+      high_pt + 
+      high_grade + 
+      lvi + 
+      lymph_nodes + 
+      igf1r_exprs,
+  data = DF
+)
+
+sum_mdl <- summary(mdl)
+
+mdl_tbl <- cbind(
+    sum_mdl$conf.int[ , -2],
+    sum_mdl$coefficients[ , 5]
+)
+
+rownames(mdl_tbl) <- c(
+    "Age, per 1 year increase",
+    "Sex: Female vs Male",
+    "Location: Ureter vs Pelvis",
+    "Location: Pelvis-ureter vs Pelvis",
+    "pT stage: High stage vs Low stage",
+    "WHO Grade: High grade vs low grade",
+    "Lymphovascular invasion: Present vs Absent",
+    "Lymph nodes metastasis: Present vs Absent",
+    "IGF1R: Positive vs Negative"
+)
+
+kable(
+    formatC(mdl_tbl, digits = 2, format = "fg"),
+    col.names = c("HR", "Lower .95", "Upper .95", "P value"),
+    align = c("c")
+)
+```
+

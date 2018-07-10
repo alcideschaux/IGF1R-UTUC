@@ -1,0 +1,36 @@
+---
+title: "IGF1R and clinicopathologic features"
+output: html_document
+editor_options: 
+  chunk_output_type: console
+---
+
+```{r global, message = FALSE, warning = FALSE, echo = FALSE}
+source("global.R")
+
+# Libraries
+library(simpleR)
+
+# Data
+attach(DF)
+y <- igf1r_exprs
+```
+
+# **Clinical features**
+## Age
+```{r age}
+x <- age
+tbl_nice(x, y)
+tbl_test(x, y)
+g2_nice(x, y)
+```
+
+***
+
+## Sex
+```{r sex}
+x <- sex
+tbl_nice(x, y)
+tbl_test(x, y)
+g2_nice(x, y)
+```

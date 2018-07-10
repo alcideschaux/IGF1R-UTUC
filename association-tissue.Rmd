@@ -1,0 +1,88 @@
+---
+title: "IGF1R expression by tissue type"
+---
+
+```{r global, message = FALSE, warning = FALSE, echo = FALSE}
+source("global.R")
+attach(DF_SCORES)
+```
+
+# **H-score expression**
+## All values
+```{r H_score}
+x <- H_score
+y <- tissue
+tbl_nice(x, y)
+tbl_test(x, y)
+g2_nice(x, y)
+```
+
+***
+
+## Median values
+```{r H_score_median}
+DF_SUM <- DF_SCORES %>% 
+    group_by(id, tissue) %>% 
+    summarize(marker_sum = median(H_score, na.rm = TRUE))
+x <- DF_SUM$marker_sum
+y <- DF_SUM$tissue
+tbl_nice(x, y)
+tbl_test(x, y)
+g2_nice(x, y)
+```
+
+***
+
+## Maximum values
+```{r H_score_max}
+DF_SUM <- DF_SCORES %>% 
+    group_by(id, tissue) %>% 
+    summarize(marker_sum = max(H_score, na.rm = TRUE))
+x <- DF_SUM$marker_sum
+y <- DF_SUM$tissue
+tbl_nice(x, y)
+tbl_test(x, y)
+g2_nice(x, y)
+```
+
+***
+
+# **HER2 system expression**
+## All values
+```{r HER2_score}
+x <- HER2_score
+y <- tissue
+tbl_nice(x, y)
+tbl_test(x, y)
+g2_nice(x, y)
+```
+
+***
+
+## Median values
+```{r HER2_score_median}
+DF_SUM <- DF_SCORES %>% 
+    group_by(id, tissue) %>% 
+    summarize(marker_sum = median(HER2_score, na.rm = TRUE))
+x <- DF_SUM$marker_sum
+y <- DF_SUM$tissue
+tbl_nice(x, y)
+tbl_test(x, y)
+g2_nice(x, y)
+```
+
+***
+
+## Maximum values
+```{r HER2_score_max}
+DF_SUM <- DF_SCORES %>% 
+    group_by(id, tissue) %>% 
+    summarize(marker_sum = max(HER2_score, na.rm = TRUE))
+x <- DF_SUM$marker_sum
+y <- DF_SUM$tissue
+tbl_nice(x, y)
+tbl_test(x, y)
+g2_nice(x, y)
+```
+
+***

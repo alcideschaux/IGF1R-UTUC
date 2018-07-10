@@ -1,0 +1,22 @@
+{
+    "collab_server" : "",
+    "contents" : "",
+    "created" : 1526676210945.000,
+    "dirty" : false,
+    "encoding" : "UTF-8",
+    "folds" : "",
+    "hash" : "2031758553",
+    "id" : "A0151F45",
+    "lastKnownWriteTime" : 1526925819,
+    "last_content_update" : 1526925819375,
+    "path" : "~/achaux@gmail.com/research/Projects_Analysis/IFG1R-UTUC/report/global.R",
+    "project_path" : "global.R",
+    "properties" : {
+        "cursorPosition" : "5,61",
+        "scrollLine" : "0"
+    },
+    "relative_order" : 1,
+    "source_on_save" : false,
+    "source_window" : "",
+    "type" : "r_source"
+}
