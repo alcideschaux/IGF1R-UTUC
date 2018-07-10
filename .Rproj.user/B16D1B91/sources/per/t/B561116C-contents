@@ -1,0 +1,97 @@
+---
+title: "IGF1R in UTUC"
+---
+
+**Title:** Expression status and prognostic value of insulin-like growth factor-1 receptor (IGF1R) in upper tract urothelial carcinoma
+
+**Authors:** Eich, Marie-Lisa^1^; Sheila Faraj^2^; Alcides Chaux^3^; George J. Netto^2^
+
+**Affiliations:** ^1^Department of Pathology, The University of Alabama at Birmingham, Birmingham, AL; ^2^Department of Pathology, The Johns Hopkins Medical Institutions, Baltimore, MD; ^3^Centro para el Desarrollo de la Investigación Científica (CEDIC), Asunción, Paraguay.
+
+**Last update:** `r Sys.Date()`
+
+***
+
+```{r global, message = FALSE, warning = FALSE, echo = FALSE}
+source("global.R")
+```
+
+# **Introduction**
+The insulin-like growth factor-1 receptor (IGFR1) is a tyrosine kinase receptor that plays a key role in cell growth and transformation. IGFR1 is overexpressed in several tumors, but its expression status has not been described in upper tract uroethelial carcinomas (UTUC). IGFR1 inhibitors have been developed and are currently being tested in clinical trials. This study evaluates IGFR1 immunohistochemical expression in a set of UTUC and its association with clinicopathologic and outcome features.
+
+***
+
+\ 
+
+# **Material & Method**
+## Case selection and tissue microarray construction
+The present study includes tissue samples from `r nrow(DF)` patients with UTUC. Cases were selected based on availability of formalin-fixed, paraffin-embedded tissue blocks. Two tissue microarrays (TMAs) were built at the Johns Hopkins TMA Lab Core (Baltimore, MD). A total of `r nrow(DF_SCORES)` TMA spots were evaluated including tumor and paired nontumor tissues.
+
+\   
+
+## IGF1R expression and scoring system
+IGF1R expression was evaluated by immunohistochemistry on 5 $\mu$m TMA sections using a monoclonal rabbit (clone G11) anti-IGF1R antibody (Catalog #790-4346, Ventana Medical Systems, Inc., Tucson, AZ). Only membranous staining was considered as indicative of IGF1R expression.
+
+IGF1R expression was evaluated using 2 different approaches. The first approach consisted of a quantitative H-score system in which IGF1R expression was estimated as the sum of the products of the intensity (0 for negative, 1 for weakly positive, 2 for moderately positive, and 3 for strongly positive) multiplied by the extent of the stain (0% to 100%), obtaining a value ranging from 0 to 300. Estimations of the H-score were made spot by spot.
+
+The second approach for evaluating IGF1R expression consisted of a semi-quantitative score system similar to the standardized scoring system used for evaluating HER2 immunohistochemical expression. TMA spots were classified in any of the following categories: 0, no reactivity or membranous reactivity in < 10% of tumor cells; 1+, faint or barely perceptible membranous partial reactivity in 10% or more of tumors cells; 2+, weak to moderate complete membranous reactivity in 10% or more of tumor cells; 3+, strong complete membranous reactivity in 10% or more of tumor cells.
+
+***
+
+\   
+
+# **Data analysis**
+Data analysis was carried out using 3 approaches: descriptive analysis, association analysis, and outcome analysis. Data was analyzed and plots were generated using `r R.version.string` from the R Foundation for Statistical Computing (Vienna, Austria). R packages from the [tidyverse](https://cran.r-project.org/web/packages/tidyverse/index.html) were extensively used.
+
+\ 
+
+## Descriptive analysis
+Categorical variables were described using frequency tables and barplots. Numerical variables were described using measurements of central tendency and dispersion, histograms, and density plots. The descriptive analysis included:
+
+- Cohort features
+- IGF1R features in nontumor and tumor tissues (by TMA spots)
+    + H-scores
+    + HER2 system
+
+\ 
+
+## Association analysis
+Marker values were compared considering clinical, pathologic, and outcome features. In this context, marker values were considered as the outcome variables and the aforementioned features as the predictor variables. Variables were described using measurements of central tendency and dispersion, boxplots, and density plots.
+
+The association was evaluated using either the [Mann-Whitney U test for the sum of ranks](https://en.wikipedia.org/wiki/Mann-Whitney_U_test) or the [Kruskal-Wallis rank sum test](https://en.wikipedia.org/wiki/Kruskal-Wallis_one-way_analysis_of_variance), depending on the features of the predictor variables.
+
+The association analysis included:
+
+- IGF1R expression by tissue type (all, median and max values)
+    + H-scores
+    + HER2 system
+- IGF1R expression by cohort features (median and max values)
+    + H-scores
+    + HER2 system
+
+\ 
+
+## Outcome analysis
+The outcome analysis included regression modeling and time-to-event (survival) analysis. IGF1R levels were categorized as high/kow expression using the median and the maximum values as cutoff points. Outcome variables included tumor recurrence, tumor progression, overall mortality, and cancer-related mortality.
+
+Odds ratios were estimated using unconditional binary [logistic regression](https://en.wikipedia.org/wiki/Logistic_regression). Hazard ratios were estimated using [Cox's proportional hazards regression](https://en.wikipedia.org/wiki/Proportional_hazards_model). Survival curves were built using the [Kapplan-Meier estimator](https://en.wikipedia.org/wiki/Kaplan-Meier_estimator) and compared using the [log-rank test](https://en.wikipedia.org/wiki/Log-rank_test).
+
+The outcome analysis included:
+
+- Regression analysis
+    + Tumor recurrence
+    + Tumor progression
+    + Overall mortality
+    + Cancer related mortality
+- Survival curves
+    + H-scores
+    + HER2 system
+    
+***
+
+\   
+
+# **Support/Financial Disclosure**
+Dr. Alcides Chaux was partially supported by an award granted by the National Council of Science and Technology (CONACYT) dependent of the Presidency of the Republic of Paraguay, as an Active Researcher of Level 2 of the National Incentive Program for Researchers (PRONII).
+
+\ 

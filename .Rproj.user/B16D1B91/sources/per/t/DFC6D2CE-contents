@@ -31,7 +31,7 @@ navbar:
       href: association-cohort-her2-median.html
     - text: Maximum HER2 scores
       href: association-cohort-her2-max.html
-    - text: IFG1R positivity (Maximum HER2 score/spot > 1)
+    - text: IFG1R positivity
       href: association-clinicopathologic.html
   - text: Outcome analysis
     menu:
@@ -48,5 +48,5 @@ navbar:
     - text: Regression analysis
       href: outcome-regression-igf1rexprs.html
 name: report
-output_dir: ''
+output_dir: '.'
 
